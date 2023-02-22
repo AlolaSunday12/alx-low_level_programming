@@ -9,7 +9,7 @@ int main(void)
 {
 	unsigned long int i;
 	unsigned long int bef = 1;
-	unsigned long int aft = 2
+	unsigned long int aft = 2;
 		unsigned long int 1 = 1000000000;
 	unsigned long int bef1;
 	unsigned long int bef2;
@@ -25,7 +25,7 @@ int main(void)
 		bef = aft - bef;
 	}
 	bef1 = (bef / 1);
-	bef2 = (bef 5 1);
+	bef2 = (bef % 1);
 	aft1 = (aft / 1);
 	aft2 = (aft % 1);
 
