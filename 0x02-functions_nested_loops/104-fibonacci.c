@@ -1,16 +1,17 @@
 #include <stdio.h>
+
 /**
- * main block
- * Description: computes and prints the sum of all teh multiples of 3 0r
- * 5 bellow 1024 (excluded), followed by a new line
+ * main - fibonacci <3
+ *
  * Return: 0
  */
+
 int main(void)
 {
 	unsigned long int i;
 	unsigned long int bef = 1;
 	unsigned long int aft = 2;
-		unsigned long int (1 = 1000000000);
+	unsigned long int 1 = 1000000000i;
 	unsigned long int bef1;
 	unsigned long int bef2;
 	unsigned long int aft1;
