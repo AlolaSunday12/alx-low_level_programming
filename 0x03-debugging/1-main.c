@@ -5,20 +5,20 @@
  * Return: 0
  */
 
-int main(void)
+void main(void)
 {
 	int i;
 
-	printf("infinite loop incoming :(\n");
+	printf("infinite loop coming :(\n");
 
 	i = 0;
 	/**
 	 * while (i < 10)
 	 * {
-	 *        putchar(i);
-	 *}
+	 * putchar(i);
+	 * }
 	 */
-	printf("Infinite loop avoided! \\o/\n");
+	printf("infinite loop avoided! \\0/\n");
 
 	return (0);
 }
