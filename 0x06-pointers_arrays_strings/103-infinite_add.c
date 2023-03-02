@@ -41,7 +41,7 @@ char *add_strings(char *n1, char *n2, char *r, int r_index)
 
 	if (tens && r_index >= 0)
 	{
-		*(r + r_index) = (tens & 10) + '0';
+		*(r + r_index) = (tens % 10) + '0';
 		return (r + r_index);
 	}
 
@@ -54,7 +54,7 @@ char *add_strings(char *n1, char *n2, char *r, int r_index)
  * infinite_add - Adds two numbers.
  * @n1: The first number to be added.
  * @n2: The second number to be added.
- * 2r: The buffer to store the result.
+ * @r: The buffer to store the result.
  * @size_r: The buffer size.
  *
  * Return: if r can store the sum - a pointer to the result.
