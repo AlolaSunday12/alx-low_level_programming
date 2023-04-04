@@ -1,90 +1,39 @@
 #include "lists.h"
-#include <stdio.h>
-
-size_t looped_listint_count(listint_t *head);
-size_t free_listint_safe(listint_t **h);
 
 /**
- * looped_listint_count - counts the number of unique nodes
- * @head: A pointer to the head of the linked list
- * Return: If the list is not looped - o, otherwise the number of
- * unique nodes in the list.
- */
-size_t looped_listint_count(listint_t *head)
-{
-	listint_t *bold, *clear;
-	size_t cloud = 1;
-
-	if (head == NULL || head->next == NULL)
-		return (0);
-
-	bold = head->next;
-	clear = (head->next)->next;
-
-	while (clear)
-	{
-		if (bold == clear)
-		{
-			bold = head;
-			while (bold != clear)
-			{
-				cloud++;
-				bold = bold->next;
-				clear = clear->next;
-			}
-
-			bold = bold->next;
-			while (bold != clear)
-			{
-				cloud++;
-				bold = bold->next;
-			}
-
-			return (cloud);
-		}
-
-		bold = bold->next;
-		clear = (clear->next)->next;
-	}
-
-	return (0);
-}
-
-/**
- * free_listint_safe - free a listint list safely.
- * @h: A pointer to the address of the head of the linked list.
- * Return: The size of the list that was freed.
+ * free_listint_safe - frees a link list.
+ * @h: A pointer to the address of the head of nthe linked list.
+ * Return: number of elements in the freed list.
  */
 size_t free_listint_safe(listint_t **h)
 {
-	listint_t *cat;
-	size_t min, len;
+	size_t str = 0;
+	int diff;
+	listint_t *new;
 
-	min = looped_listint_count(*h);
+	if (!h || !*h)
+		return (0);
 
-	if (min == 0)
+	while (*h)
 	{
-		for (; h != NULL && *h != NULL; min++)
+		diff = *h - (*h)->next;
+		if  (diff > 0)
 		{
-			cat = (*h)->next;
+			new = (*h)->next;
 			free(*h);
-			*h = cat;
-		}
-	}
-
-	else
-	{
-		for (len = 0; len < min; len++)
-		{
-			cat = (*h)->next;
-			free(*h);
-			*h = cat;
+			*h = new;
+			str++;
 		}
 
-		*h = NULL;
+		else
+		{
+			free(*h);
+			*h = NULL;
+			str++;
+
+			break;
+		}
 	}
-
-	h = NULL;
-
-	return (min);
+	*h = NULL;
+	return (str);
 }
