@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-char *create_bug(char *file);
+char *create_buffer(char *file);
 void close_file(int fd);
 
 /**
@@ -10,7 +10,7 @@ void close_file(int fd);
  * @file: The name of the file bug is storing chars for.
  * Return: A pointer to the newly allocated bug.
  */
-char *create_bug(char *file)
+char *create_buffer(char *file)
 {
 	char *bug;
 
@@ -64,7 +64,7 @@ int main(int argc, char *argv[])
 		exit(97);
 	}
 
-	bug = create_bug(argv[2]);
+	bug = create_buffer(argv[2]);
 	from = open(argv[1], O_RDONLY);
 	i = read(from, bug, 1024);
 	to = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, 0664);
