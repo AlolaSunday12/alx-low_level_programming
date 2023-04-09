@@ -2,27 +2,27 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-char *create_bug(char *file);
+char *create_buffer(char *file);
 void close_file(int fd);
 
 /**
- * create_bug - Alloctaes 1024 bytes for a bug.
+ * create_buffer - Alloctaes 1024 bytes for a bug.
  * @file: The name of the file bug is storing chars for.
  * Return: A pointer to the newly allocated bug.
  */
-char *create_bug(char *file)
+char *create_buffer(char *file)
 {
-	char *bug;
+	char *buffer;
 
-	bug = malloc(sizeof(char) * 1024);
+	buffer = malloc(sizeof(char) * 1024);
 
-	if (bug == NULL)
+	if (buffer == NULL)
 	{
 		dprintf(STDERR_FILENO, "Error: can't write to %s\n", file);
 		exit(99);
 	}
 
-	return (bug);
+	return (buffer);
 }
 
 /**
@@ -56,7 +56,7 @@ void close_file(int fd)
 int main(int argc, char *argv[])
 {
 	int from, to, i, j;
-	char *bug;
+	char *buffer;
 
 	if (argc != 3)
 	{
@@ -64,33 +64,33 @@ int main(int argc, char *argv[])
 		exit(97);
 	}
 
-	bug = create_bug(argv[2]);
+	buffer = create_buffer(argv[2]);
 	from = open(argv[1], O_RDONLY);
-	i = read(from, bug, 1024);
+	i = read(from, buffer, 1024);
 	to = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, 0664);
 
 	do {
 		if (from == -1 || i == -1)
 		{
 			dprintf(STDERR_FILENO, "Error: can't read from file %s\n", argv[1]);
-			free(bug);
+			free(buffer);
 			exit(98);
 		}
 
-		j = write(to, bug, i);
+		j = write(to, buffer, i);
 		if (to == -1 || j == -1)
 		{
 			dprintf(STDERR_FILENO, "Error: can't write to %s\n", argv[2]);
-			free(bug);
+			free(buffer);
 			exit(99);
 		}
 
-		i = read(from, bug, 1024);
+		i = read(from, buffer, 1024);
 		to = open(argv[2], O_WRONLY | O_APPEND);
 
 	} while (i > 0);
 
-	free(bug);
+	free(buffer);
 	close_file(from);
 	close_file(to);
 
