@@ -11,9 +11,9 @@ void print_magic(unsigned char *e_ident);
 void print_class(unsigned char *e_ident);
 void print_data(unsigned char *e_ident);
 void print_version(unsigned char *e_ident);
-void print_ABI(unsigned char *e_ident);
+void print_abi(unsigned char *e_ident);
 void print_osabi(unsigned char *e_ident);
-void print_type(unsigned long int e_type, unsigned char *e_ident);
+void print_type(unsigned int e_type, unsigned char *e_ident);
 void print_entry(unsigned long int e_entry, unsigned char *e_ident);
 void close_elf(int elf);
 
@@ -48,7 +48,7 @@ void print_magic(unsigned char *e_ident)
 {
 	int i;
 
-	printf(" magic; ");
+	printf(" Magic: ");
 
 	for (i = 0; i < EI_NIDENT; i++)
 	{
@@ -91,7 +91,7 @@ void print_class(unsigned char *e_ident)
  */
 void print_data(unsigned char *e_ident)
 {
-	printf(" data;     ");
+	printf(" data:     ");
 
 	switch (e_ident[EI_DATA])
 	{
@@ -134,7 +134,7 @@ void print_version(unsigned char *e_ident)
  */
 void print_osabi(unsigned char *e_ident)
 {
-	printf(" osabi;    ");
+	printf(" OS/ABI:    ");
 
 	switch (e_ident[EI_OSABI])
 	{
@@ -154,7 +154,7 @@ void print_osabi(unsigned char *e_ident)
 		printf("UNIX - Solaris\n");
 		break;
 		case ELFOSABI_IRIX:
-		printf("UNIX - Irix\n");
+		printf("UNIX - IRIX\n");
 		break;
 		case ELFOSABI_FREEBSD:
 		printf("UNIX - FreeBSD\n");
@@ -166,7 +166,7 @@ void print_osabi(unsigned char *e_ident)
 		printf("ARM\n");
 		break;
 		case ELFOSABI_STANDALONE:
-		printf("standalone App\n");
+		printf("Standalone App\n");
 		break;
 		default:
 		printf("<unknown: %x>\n", e_ident[EI_OSABI]);
@@ -174,10 +174,10 @@ void print_osabi(unsigned char *e_ident)
 }
 
 /**
- * print_ABI - printsthe len of an ELF header.
+ * print_abi - printsthe len of an ELF header.
  * @e_ident: A pointer
  */
-void print_ABI(unsigned char *e_ident)
+void print_abi(unsigned char *e_ident)
 {
 	printf(" ABI version:    %d\n", e_ident[EI_ABIVERSION]);
 }
@@ -187,12 +187,12 @@ void print_ABI(unsigned char *e_ident)
  * @e_type: The ELF enter.
  * @e_ident: A pointer
  */
-void print_type(unsigned long int e_type, unsigned char *e_ident)
+void print_type(unsigned int e_type, unsigned char *e_ident)
 {
 	if (e_ident[EI_DATA] == ELFDATA2MSB)
 		e_type >>= 8;
 
-	printf("  type;       ");
+	printf("  Type;       ");
 
 	switch (e_type)
 	{
@@ -212,7 +212,7 @@ void print_type(unsigned long int e_type, unsigned char *e_ident)
 		printf("CORE (Core file)\n");
 		break;
 		default:
-		printf("<unknown; %lx>\n", e_type);
+		printf("<unknown: %x>\n", e_type);
 	}
 }
 
@@ -223,7 +223,7 @@ void print_type(unsigned long int e_type, unsigned char *e_ident)
  */
 void print_entry(unsigned long int e_entry, unsigned char *e_ident)
 {
-	printf(" entry point address;      ");
+	printf(" Entry point address:      ");
 
 	if (e_ident[EI_DATA] == ELFDATA2MSB)
 	{
