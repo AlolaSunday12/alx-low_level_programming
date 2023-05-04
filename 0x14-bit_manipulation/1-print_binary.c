@@ -2,8 +2,8 @@
 #include <stdio.h>
 
 /**
- * print_binary -function that print the binary representation of a number.:
- * @n: number to print in binary
+ * print_binary - function that print the binary representation of a number.
+ * @n: number to print in binary.
  */
 void print_binary(unsigned long int n)
 {
@@ -12,4 +12,3 @@ void print_binary(unsigned long int n)
 
 	putchar((n & 1) ? '1' : '0');
 }
-
