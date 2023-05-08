@@ -7,7 +7,7 @@ void close_file(int fd);
 /**
  * create_buffer - Allocates 1024 bytes.
  * @file: The name of the file buffer is storing chars for.
- * Return: Apointer.
+ * Return: A pointer.
  */
 char *create_buffer(char *file)
 {
@@ -16,7 +16,7 @@ char *create_buffer(char *file)
 	buffer = malloc(sizeof(char) * 1024);
 	if (buffer == NULL)
 	{
-		dprintf(STDERR_FILENO, "Error: cant't write to %s\n", file);
+		dprintf(STDERR_FILENO, "Error: Cant't write to %s\n", file);
 		exit(99);
 	}
 	return (buffer);
@@ -32,7 +32,7 @@ void close_file(int fd)
 	i = close(fd);
 	if (i == -1)
 	{
-		dprintf(STDERR_FILENO, "Error: can't close fd %d\n", fd);
+		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fd);
 		exit(100);
 	}
 }
