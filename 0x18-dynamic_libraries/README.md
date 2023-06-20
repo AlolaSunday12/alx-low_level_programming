@@ -265,5 +265,5 @@ mss@gm_server$ ls -la
 mss@gm_server$ md5sum gm
 d52e6c18e0723f5b025a75dea19ef365  gm
 mss@gm_server$ ./gm 9 8 10 24 75 9
---> Please make me win!
+
 
