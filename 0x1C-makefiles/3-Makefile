@@ -1,0 +1,31 @@
+# Makefile for compiling the "school" program
+
+# Compiler settings
+CC = gcc
+SRC = main.c school.c
+OBJ = $(SRC:.c=.o)
+NAME = school
+RM = rm -f
+
+# Default rule
+all: $(NAME)
+
+# Compile the executable
+$(NAME): $(OBJ)
+	$(CC) $(OBJ) -o $(NAME)
+
+# Compile source files to object files
+%.o: %.c
+	$(CC) -c $< -o $@
+
+# Clean rules
+clean:
+	$(RM) *~ $(NAME)
+
+oclean:
+	$(RM) $(OBJ)
+
+fclean: clean oclean
+
+# Recompile all source files
+re: fclean all
