@@ -1,0 +1,29 @@
+# Makefile for compiling the "school" program
+
+CC := gcc
+CFLAGS := -Wall -Werror -Wextra -pedantic
+SRC := main.c school.c
+OBJ := $(SRC:.c=.o)
+NAME := school
+
+.PHONY: all clean oclean fclean re
+
+all: $(NAME)
+
+$(NAME): $(OBJ)
+	$(CC) $(OBJ) -o $@
+
+clean:
+	-$(RM) *~ $(NAME)
+	-$(RM) $(OBJ)
+
+oclean:
+	-$(RM) $(OBJ)
+
+fclean: oclean
+	-$(RM) $(NAME)
+
+re: fclean all
+
+$(OBJ): $(SRC) m.h
+	$(CC) -c $(SRC) -o $@
